@@ -1,6 +1,6 @@
 <?php
     //$connection = mysqli_connect("localhost","root","");
-    $db = new mysqli("localhost", "root", "", "register");
+    $db = new mysqli("localhost", "root", "", "web_homework");
     if ($db->connect_error) {
         die('無法連上資料庫：' . $db->connect_error);
     }

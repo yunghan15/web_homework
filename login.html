@@ -12,13 +12,38 @@
     <link rel="stylesheet" href="style.css">
       
     <!-- JS -->
-    <!--<script src="check.js" type="text/javascript"></script>-->
+    <script src="checkLogIn.js" type="text/javascript"></script>
+      
+    <!-- JS get cokkie-->
+    <script defer="defer" type="text/javascript">
+        function getCookie(cookieName) {
+          var name = cookieName + "=";
+          var ca = document.cookie.split(';');
+          for(var i=0; i<ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0)==' ') 
+                  c = c.substring(1);
+              if (c.indexOf(name) == 0) 
+                  return c.substring(name.length,c.length);
+          }
+          return "";
+        }
+        /*Error Msg
+          0: No such account
+          1: Wrong password*/
+        var errNo = getCookie('errNo');
+        var redirection = getCookie('redirection');
+        if(redirection == "true") {
+            if(errNo == "0") alert("No such account!");
+            else if(errNo == "1") alert("Wrong password!");            
+        }
+    </script>
       
     <title>Log in</title>
   </head>
   <body>
     <div class="container form-control col-10 col-sm-8 col-xl-4">
-        <h3>LOG IN</h3>
+        <center><h3>LOG IN</h3></center>
         <form name="theForm" action="login.php" method="post">
           <!--userName-->
           <div class="form-group">
@@ -34,10 +59,11 @@
             </div>
           </div>  
             
-          <!--register-->
+          <!--Sign in-->
           <div class="form-group row">
             <div class="btns">
-                <button type="submit" class="button">Sign In</button>
+                <!--<button type="submit" class="button">Sign In</button>-->
+                <input name="send" class="button" value="Sign In" type="button" onclick="check(theForm)">
             </div> 
           </div>
         </form>

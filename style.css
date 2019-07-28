@@ -18,9 +18,25 @@ body {
     border-radius: 10px;
 }
 
+.bntFile {
+    background-color: #828282;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    display: inline-block;
+    margin: 20px;
+    border-radius: 10px;
+    
+}
+
 .container {
     margin-top: 15px;
     border: none;
+}
+
+.userTitle {
+    text-transform: uppercase;
 }
 
 #optionBlue {
@@ -38,3 +54,11 @@ body {
 #optionGreen {
     background:#4d8f64; color:#fff;0
 }
+
+        #userTitle {
+            text-transform: uppercase;
+        }
+        
+        .personalPage {
+            margin-top: 20px;
+        }
