@@ -19,6 +19,13 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     <style>
+        body {
+            background-color: #92c8d3;
+        }
+        .container {
+            height:auto;
+            background: #fff;
+        }
         .table {
             margin-top: 10px;
             border: none;

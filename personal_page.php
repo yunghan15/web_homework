@@ -6,8 +6,9 @@
     $db->set_charset("utf8");
 
     //get cookie
-    /*msg=0:upload successfully
-    msg=1:file exists*/
+    /*msg=0: upload successfully
+    msg=1: file exists 
+    msg=2: post a topic*/
     $msg = $_COOKIE["msg"];
     $userName = $_COOKIE["userName"];
 
@@ -38,6 +39,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     <style>
+        body {
+            background-color: #92c8d3;
+        }
         #userTitle {
             text-transform: uppercase;
         }
@@ -52,8 +56,17 @@
             background: none; 
             border: none;
         }
+        .container {
+            height:auto;
+            background: #fff;
+        }
     </style>
       
+    <script>
+        if(<?php echo $msg ?> == "1")
+            alert("File already existst!")
+    </script>
+        
 
     <title><?php echo $userName; ?></title>
   </head>
@@ -84,6 +97,11 @@
                         ?><input class="fileName" type="submit" name="fileName" value="<?php echo $fileName; ?>">
                     <?php }?>
             </form>
+        </div>
+        <div class="messageBoard">
+            <h5>Message Board:</h5>
+                <?php setcookie("nserName", $userName); ?>
+                <a href="messageBoard.php" style="font-decoration: none; color: gray;">Click me!</a>
         </div>
     </div>
     <!-- Optional JavaScript -->

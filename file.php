@@ -29,6 +29,13 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     <style>
+        body {
+            background-color: #92c8d3;
+        }
+        .container {
+            height:auto;
+            background: #fff;
+        }
         .download_rename {
             text-align: center;
             background: #AAAAAA;

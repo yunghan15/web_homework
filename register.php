@@ -33,8 +33,8 @@
     echo $color;
     echo '<br>';
     echo 'Gender: ';
-    echo $gender;
+    echo $gender;*/
 
-    mysqli_close($db);*/
+    mysqli_close($db);
     header("Location: success.html"); 
 ?>

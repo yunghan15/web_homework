@@ -15,12 +15,12 @@
     1----same file name
     */
     if(file_exists("upload/".$_FILES["file"]["name"])){
-        setcookie("msg", "1", time()+36000);
+        setcookie("msg", "1", time()+10);
     }
     else {
         $db->query($sql) or die($db->error . $sql);
         move_uploaded_file($_FILES["file"]["tmp_name"],"upload/".$_FILES["file"]["name"]);
-        setcookie("msg", "0", time()+36000);
+        setcookie("msg", "0", time()+10);
     }
     setcookie("userName", $_POST["userName"], time()+36000);
     header("Location: personal_page.php");    
