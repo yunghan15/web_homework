@@ -30,8 +30,8 @@
         }
         //success and redirect to personal page
         else {
-            setcookie("userName", $userName, time()+36000);
-            setcookie("msg", "0", time()+36000);
+            setcookie("userName", $userName, time()+15);
+            setcookie("msg", "0", time()+15);
             header("Location: personal_page.php");           
         }
     }

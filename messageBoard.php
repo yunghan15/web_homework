@@ -5,14 +5,12 @@
     }
     $db->set_charset("utf8");
 
-    //get cookie
-    $userName = $_COOKIE["userName"];
+    //get userName
+    $userName = $_GET["userName"];
 
     //query topic
     $sql = "SELECT * FROM `topic`";
     $result = mysqli_query($db, $sql);
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,7 +32,20 @@
             height:auto;
             background: #fff;
         }
+        .msgBtn {
+                background-color: #407072;
+                border: none;
+                color: white;
+                padding: 5px 10px;
+                text-align: center;
+                display: inline-block;
+                margin: 20px;
+                border-radius: 10px;
+        }
     </style>
+      
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/ab129dd4e6.js"></script>
  
     <title>Message Board</title>
   </head>
@@ -44,47 +55,73 @@
             <center><h3>Message Board</h3></center>
         </div>
         <div class="newTopic">
-            <h5>New Topic:</h5>
+            <center><h4>New Topic</h4></center>
             <form action="newTopic.php" method="post">
                 <div class="form-group">
                     <textarea class="form-control" rows="3" name="content"></textarea>
                     <input type="hidden" name="userName" value="<?php echo $userName; ?>">
-                    <center><button class="button" type="submit" class="btn btn-default">POST</button></center>
+                    <center><button class="msgBtn" type="submit">POST</button></center>
                 </div>
             </form>
         </div>
         <div class="topicList">
-            <h5>Topic List:</h5>
+            <center><h4>Topic List</h4></center>
             <?php while($row = mysqli_fetch_object($result)) { 
-                $content = ($row->content);
-                $userName = ($row->userName);
-                $id = ($row->id);
-                $time = ($row->time);?>
+                $topicContent = ($row->content);
+                $topicUserName = ($row->userName);
+                $topicId = ($row->id);
+                $topicTime = ($row->time);?>
                 <div class="topic">
-                    <h6>Autor: <?php echo $userName; ?></h6>
-                    <div class="content">
-                        <?php echo $content; ?>
+                    <h5 style="text-transform: uppercase;">
+                        <?php echo $topicUserName; 
+                        if ($userName == $topicUserName) { ?>
+                            <a href="edit.php?msg=0&id=<?php echo $topicId; ?>&userName=<?php echo $userName; ?>" style="color: #407072; text-decoration: none;">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="delete.php?msg=0&id=<?php echo $topicId; ?>&userName=<?php echo $userName; ?>" style="color: #407072;  text-decoration: none;">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        <?php } ?>
+                    </h5>
+                    <div class="content" style="word-break: break-all;">
+                        <?php echo $topicContent; ?>
+                        <p style="font-size: 13px; color: #828282;">
+                            <?php echo $topicTime; ?>
+                        </p>                       
                     </div>
-                    <div class="reply" style="margin-left: 25px; margin-top:5px;">
+                    <div class="reply" style="margin-left: 25px; margin-right: 25px; margin-top: 25px;">
                         <div class="replyContent">
-                            <h6>Reply: </h6>
-                            <?php $sql = "SELECT * FROM `reply` WHERE id = '{$id}'"; 
+                            <?php $sql = "SELECT * FROM `reply` WHERE id = '{$topicId}'"; 
                             $replyResult = mysqli_query($db, $sql);
                             while($replyRow = mysqli_fetch_object($replyResult)) {
                                 $replyContent = ($replyRow->content);
                                 $replyId = ($replyRow->id);
-                                $replyuserName = ($replyRow->userName);
-                                $replyTime = ($replyRow->time); ?>
-                                <h6>Autor: <?php echo $replyuserName; ?></h6>
+                                $replyTime = ($replyRow->time); 
+                                $replyUserName = ($replyRow->userName);
+                                $deleteId = ($replyRow->deleteId); ?>
+                                <h6 style="text-transform: uppercase;">
+                                    <?php echo $replyUserName;                        
+                                    if ($userName == $replyUserName) { ?>
+                                        <a href="edit.php?msg=1&id=<?php echo $deleteId; ?>&userName=<?php echo $userName; ?>" style="color: #407072;  text-decoration: none;">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="delete.php?msg=1&id=<?php echo $deleteId; ?>&userName=<?php echo $userName; ?>" style="color: #407072;  text-decoration: none;">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    <?php } ?>
+                                </h6>
                                 <p><?php echo $replyContent; ?></p>
+                                <p style="font-size: 12px; color: #828282;">
+                                    <?php echo $topicTime; ?>
+                                </p>                                
                             <?php }?>
                         </div>
                         <form action="reply.php" method="post">
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" name="content"></textarea>
                                 <input type="hidden" name="userName" value="<?php echo $userName; ?>">
-                                <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                <center><button class="button" type="submit" class="btn btn-default">REPLY</button></center>
+                                <input type="hidden" name="id" value="<?php echo $topicId; ?>">
+                                <center><button class="msgBtn" type="submit">REPLY</button></center>
                             </div>
                         </form>
                     </div>

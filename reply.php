@@ -14,7 +14,8 @@
     $sql = "INSERT into reply (id, userName, content, time) VALUES ('{$id}', '{$userName}', '{$content}', '{$time}')";
 
     $db->query($sql) or die($db->error . $sql);
-
-    header("Location: messageBoard.php");  
+    
+    setcookie("userName", $userName, time()+15);
+    header("Location: messageBoard.php?userName=".$userName);  
 
 ?>

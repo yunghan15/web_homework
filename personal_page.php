@@ -100,8 +100,7 @@
         </div>
         <div class="messageBoard">
             <h5>Message Board:</h5>
-                <?php setcookie("nserName", $userName); ?>
-                <a href="messageBoard.php" style="font-decoration: none; color: gray;">Click me!</a>
+                <a href="messageBoard.php?userName=<?php echo $userName; ?>" style="font-decoration: none; color: gray;">Click me!</a>
         </div>
     </div>
     <!-- Optional JavaScript -->
